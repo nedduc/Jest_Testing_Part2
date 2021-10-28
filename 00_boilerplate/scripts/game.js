@@ -9,6 +9,13 @@ function newGame() {
     game.currentGame = [];
     game.playerMoves = [];
     showScore();
+    addTurn();
+}
+
+function addTurn() {
+    game.playerMoves = [];
+    game.currentGame.push(game.choices[(Math.floor(Math.random() * 4))]);
+    // showTurns();
 }
 
 function showScore() {
@@ -16,4 +23,4 @@ function showScore() {
 }
 
 
-module.exports = { game, newGame, showScore };
+module.exports = { game, newGame, showScore, addTurn };
