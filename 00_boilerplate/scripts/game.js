@@ -22,5 +22,11 @@ function showScore() {
     document.getElementById("score").innerText = game.score;
 }
 
+function lightsOn(circ) {
+    document.getElementById(circ).classList.add(circ + "light");
+    setTimeout(function () {
+        document.getElementById(circ).classList.remove(circ + "light");
+    }, 400);
+}
 
-module.exports = { game, newGame, showScore, addTurn };
+module.exports = { game, newGame, addTurn, showScore, lightsOn };
