@@ -9,12 +9,13 @@ function newGame() {
     game.score = 0;
     game.currentGame = [];
     game.playerMoves = [];
+
     for (let circle of document.getElementsByClassName("circle")) {
         if (circle.getAttribute("data-listener") !== "true") {
             circle.addEventListener("click", (e) => {
-                let move = e.tatget.getAttribute("id");
-                lightsOn(move);
+                let move = e.target.getAttribute("id");
                 game.playerMoves.push(move);
+                lightsOn(move);
                 playerTurn();
             });
             circle.setAttribute("data-listener", "true");
@@ -35,9 +36,9 @@ function showScore() {
 }
 
 function lightsOn(circ) {
-    document.getElementById(circ).classList.add(circ + "light");
+    document.getElementById(circ).classList.add("light");
     setTimeout(function () {
-        document.getElementById(circ).classList.remove(circ + "light");
+        document.getElementById(circ).classList.remove("light");
     }, 400);
 }
 
@@ -51,5 +52,18 @@ function showTurns() {
         }
     }, 800);
     }
+    function playerTurn() {
+	    let i = game.playerMoves.length - 1;	
+    if (game.currentGame[i] === game.playerMoves[i]) {	
+        if (game.currentGame.length === game.playerMoves.length) {	
+            game.score++;	
+            showScore();	
+            addTurn();	
+        }	
+    } else {	
+        alert("Wrong move!");	
+        newGame();	
+    }	
+}
 
-module.exports = { game, newGame, addTurn, showScore, lightsOn, showTurns };
+module.exports = { game, newGame, addTurn, showScore, lightsOn, showTurns, playerTurn };
